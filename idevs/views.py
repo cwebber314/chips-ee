@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.template import loader
 from .forms import ConductorForm
 
+#import pdb
+
 from textwrap import dedent
 import csv
 from io import StringIO
@@ -24,8 +26,8 @@ for cond in CONDS:
     cond['condid'] = int(cond['condid'])
 
 def get_cond(condid):
-    ret = CONDS[0]
-    condid = condid
+    ret = None
+    condid = int(condid)
     for cond in CONDS:
         if cond['condid'] == condid:
             ret = cond
@@ -63,6 +65,7 @@ def branch(request):
             data = form.cleaned_data
             kv = data['kv']
             ll = data['line_length']
+            #pdb.set_trace()
             cond = get_cond(data['condid'])
             cond = cond_pu(cond, kv, ll)
             cond['length'] = ll
@@ -70,10 +73,11 @@ def branch(request):
             cond['from_bus'] = data['from_bus']
             cond['ckt'] = data['ckt']
             cond['owner'] = 'OWNER'
+            cond['kv'] = kv
 
             #flash('IDEV Created') # right now there is nowhere in HTML to receive the flash
             idev = dedent("""\
-                    @! Branch is: %(description)s %(length)s mi
+                    @! Branch is: %(description)s %(length)s mi at %(kv)s kV
                     BAT_BRANCH_DATA,%(to_bus)s,%(from_bus)s,'%(ckt)s',,,%(owner)s,,,,%(Rpu)7f,%(Xpu)7f,%(Bpu)7f,%(sn_mva)d,%(se_mva)d,%(se_mva)d,,,,,%(length)s,,,,,;\
                     """) % cond
         else:
