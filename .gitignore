@@ -102,3 +102,6 @@ ENV/
 
 # personal
 *.swp
+venv
+staticfiles
+.env
