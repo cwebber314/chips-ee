@@ -28,7 +28,7 @@ SECRET_KEY = 'CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be us
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Application definition
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hello',
     'idevs',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
