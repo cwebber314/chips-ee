@@ -4,6 +4,7 @@ from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder
 from crispy_forms.bootstrap import StrictButton, FormActions
 
 KV_CHOICES = (
+    ('115', 115.0),
     ('138', 138.0),
     ('161', 161.0),
     ('230', 230.0),
