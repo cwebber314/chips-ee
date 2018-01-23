@@ -55,7 +55,7 @@ def cond_pu(cond, kv, length):
 
 def index(request):
     context = {}
-    template = loader.get_template('idevs/index.html')
+    template = loader.get_template('power/index.html')
     return HttpResponse(template.render(context, request))
 
 def branch(request):
@@ -87,7 +87,7 @@ def branch(request):
         idev = 'CREATE BRANCH ...'
 
     context = {'form': form, 'idev': idev}
-    template = loader.get_template('idevs/branch.html')
+    template = loader.get_template('power/branch.html')
     return HttpResponse(template.render(context, request))
 
 def bus(request):
@@ -107,10 +107,10 @@ def bus(request):
         idev = 'CREATE BUS ...'
 
     context = {'form': form, 'idev': idev}
-    template = loader.get_template('idevs/bus.html')
+    template = loader.get_template('power/bus.html')
     return HttpResponse(template.render(context, request))
 
 def tline_map(request):
-    template = loader.get_template('idevs/tline_map.html')
+    template = loader.get_template('power/tline_map.html')
     context = {}
     return HttpResponse(template.render(context, request))
