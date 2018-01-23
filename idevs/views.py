@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .forms import ConductorForm
+from .forms import BranchIdevForm, BusIdevForm
 
 #import pdb
 
@@ -60,7 +60,7 @@ def index(request):
 
 def branch(request):
     if request.method == 'POST':
-        form = ConductorForm(request.POST)
+        form = BranchIdevForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             kv = data['kv']
@@ -83,9 +83,34 @@ def branch(request):
         else:
             idev = 'ERROR'
     else:
-        form = ConductorForm()
+        form = BranchIdevForm()
         idev = 'CREATE BRANCH ...'
 
     context = {'form': form, 'idev': idev}
     template = loader.get_template('idevs/branch.html')
+    return HttpResponse(template.render(context, request))
+
+def bus(request):
+    if request.method == 'POST':
+        form = BusIdevForm(request.POST)
+        if form.is_valid():
+            idev = dedent("""\
+                    @! TODO: Fix this.  Add the Nominal KV
+                    BAT_BUS_DATA_3,%(busnum)d,%(ide)s,%(area)s,%(zone)s,%(owner)s,0.0, 1.0,0.0, 1.1, 0.9, 1.1, 0.9,'%(busname)s'\
+                    """)
+            data = form.cleaned_data
+            idev = idev % data
+        else:
+            idev = 'ERROR'
+    else: # Get
+        form = BusIdevForm()
+        idev = 'CREATE BUS ...'
+
+    context = {'form': form, 'idev': idev}
+    template = loader.get_template('idevs/bus.html')
+    return HttpResponse(template.render(context, request))
+
+def tline_map(request):
+    template = loader.get_template('idevs/tline_map.html')
+    context = {}
     return HttpResponse(template.render(context, request))

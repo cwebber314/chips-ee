@@ -16,7 +16,39 @@ COND_CHOICES = (
     (3, '1 - 1590 ACSR 54/7 (Falcon)'),
     )
 
-class ConductorForm(forms.Form):
+class BusIdevForm(forms.Form):
+    busnum = forms.IntegerField(label="Bus", initial=99999)
+    busname = forms.CharField(label="Bus Name", initial="NSUB")
+    buskv = forms.FloatField(label="Bus kV", initial=345.0)
+    ide = forms.ChoiceField(choices=[(1, '1:Non-Generator Bus'), (2, 'Generator Bus'), (3, 'Swing Bus')])
+    area = forms.IntegerField(label="Area", initial=2)
+    zone = forms.IntegerField(label="Zone", initial=3)
+    owner = forms.IntegerField(label="Owner", initial=520)
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        helper = self.helper
+        helper.form_method = 'POST'
+
+        helper.form_class = 'form-horizontal'
+        helper.label_class = 'col-sm-3'
+        helper.field_class = 'col-sm-9'
+        helper.layout = Layout(
+            'busnum',
+            'busname',
+            'buskv',
+            'ide',
+            'area',
+            'zone',
+            'owner',
+            FormActions(
+                Submit('create_idev', 'Create IDEV')
+                )
+            )
+
+        super(BusIdevForm, self).__init__(*args, **kwargs)
+
+class BranchIdevForm(forms.Form):
     kv = forms.ChoiceField(choices=KV_CHOICES)
     condid = forms.ChoiceField(choices=COND_CHOICES)
     line_length = forms.FloatField(label="Line Length (mi)", initial=1.0)
@@ -44,4 +76,4 @@ class ConductorForm(forms.Form):
                 )
             )
 
-        super(ConductorForm, self).__init__(*args, **kwargs)
+        super(BranchIdevForm, self).__init__(*args, **kwargs)
