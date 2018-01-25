@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .forms import BranchIdevForm, BusIdevForm
+from .forms import BranchIdevForm, BusIdevForm, TransformerIdevForm
 
 #import pdb
 
@@ -72,7 +72,7 @@ def branch(request):
             cond['to_bus'] = data['to_bus']
             cond['from_bus'] = data['from_bus']
             cond['ckt'] = data['ckt']
-            cond['owner'] = 'OWNER'
+            cond['owner'] = data['owner']
             cond['kv'] = kv
 
             #flash('IDEV Created') # right now there is nowhere in HTML to receive the flash
@@ -108,6 +108,31 @@ def bus(request):
 
     context = {'form': form, 'idev': idev}
     template = loader.get_template('power/bus.html')
+    return HttpResponse(template.render(context, request))
+
+def transformer2w(request):
+    if request.method == 'POST':
+        form = TransformerIdevForm(request.POST)
+        if form.is_valid():
+            idev = dedent("""\
+                BAT_TWO_WINDING_DATA_3, %(from_bus)d, %(to_bus)d, '%(ckt)s', 1,
+                %(from_bus)d, %(owner)d, 0, 0, 0, 33, 0, %(from_bus)d, 0, 1, 0, 1, 2, 1,
+                %(R).5f, %(X).5f, 100.0, .99, %(from_bus_kv).1f, 0.0, 1.0,
+                %(to_bus_kv).1f, %(norm_mva)d, %(emer_mva)d, %(emer_mva)s, 1.0, 1.0, 1.0, 1.0, 0.0,
+                0.0, 1.1, 0.9, 1.1, 0.9, 0.0, 0.0, 0.0, '%(name)s'
+                """)
+            data = form.cleaned_data
+            data['from_bus_kv'] = float(data['from_bus_kv'])
+            data['to_bus_kv'] = float(data['to_bus_kv'])
+            idev = idev % data
+        else:
+            idev = "ERROR"
+    else:
+        form = TransformerIdevForm()
+        idev = 'BAT_TWO_WINDING_DATA_3 ...'
+
+    context = {'form': form, 'idev': idev}
+    template = loader.get_template('power/transformer2w.html')
     return HttpResponse(template.render(context, request))
 
 def tline_map(request):

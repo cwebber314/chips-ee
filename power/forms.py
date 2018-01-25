@@ -4,6 +4,7 @@ from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder
 from crispy_forms.bootstrap import StrictButton, FormActions
 
 KV_CHOICES = (
+    ('69', 69.0),
     ('115', 115.0),
     ('138', 138.0),
     ('161', 161.0),
@@ -48,12 +49,53 @@ class BusIdevForm(forms.Form):
 
         super(BusIdevForm, self).__init__(*args, **kwargs)
 
+class TransformerIdevForm(forms.Form):
+    from_bus = forms.IntegerField(label="From Bus", initial=100)
+    from_bus_kv = forms.ChoiceField(choices=KV_CHOICES)
+    to_bus = forms.IntegerField(label="To Bus", initial=101)
+    to_bus_kv = forms.ChoiceField(choices=KV_CHOICES)
+    ckt = forms.CharField(label="Ckt Id", initial="1")
+    name = forms.CharField(label="Name", initial="NEW XFMR")
+    owner = forms.IntegerField(label="Owner", initial=520)
+    R = forms.FloatField(label="R", initial=0.001)
+    X = forms.FloatField(label="X", initial=0.04)
+    norm_mva = forms.FloatField(label="Normal Rating (MVA)", initial=600)
+    emer_mva = forms.FloatField(label="Emergency Rating (MVA)", initial=660)
+
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        helper = self.helper
+        helper.form_method = 'POST'
+
+        helper.form_class = 'form-horizontal'
+        helper.label_class = 'col-sm-3'
+        helper.field_class = 'col-sm-9'
+        helper.layout = Layout(
+            'from_bus',
+            'from_bus_kv',
+            'to_bus',
+            'to_bus_kv',
+            'ckt',
+            'name',
+            'owner',
+            'R',
+            'X',
+            'norm_mva',
+            'emer_mva',
+            FormActions(
+                Submit('create_idev', 'Create IDEV')
+                )
+            )
+        super(TransformerIdevForm, self).__init__(*args, **kwargs)
+
+
 class BranchIdevForm(forms.Form):
     kv = forms.ChoiceField(choices=KV_CHOICES)
     condid = forms.ChoiceField(choices=COND_CHOICES)
     line_length = forms.FloatField(label="Line Length (mi)", initial=1.0)
-    to_bus = forms.CharField(label="To Bus", initial="TOBUS")
-    from_bus = forms.CharField(label="From Bus", initial="FROMBUS")
+    from_bus = forms.IntegerField(label="From Bus", initial=100)
+    to_bus = forms.IntegerField(label="To Bus", initial=101)
+    owner = forms.IntegerField(label="Owner", initial=520)
     ckt = forms.CharField(label="Ckt Id", initial="1")
 
     def __init__(self, *args, **kwargs):
@@ -71,9 +113,9 @@ class BranchIdevForm(forms.Form):
             'to_bus',
             'from_bus',
             'ckt',
+            'owner',
             FormActions(
                 Submit('create_idev', 'Create IDEV')
                 )
             )
-
         super(BranchIdevForm, self).__init__(*args, **kwargs)
