@@ -1,0 +1,23 @@
+{% extends "power/base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block content%}
+<div class="container">
+  <h2>Branch IDEV Maker</h2>
+      {% crispy form %}
+  <p>The IDEV looks like:</p>
+	<code><pre>{{ idev }}</pre></code>
+<h2>Typical Transformer Values</h2>
+<ul>
+    <li>161/69 kV</li>
+    <ul>
+        <li>R: 0.001</li>
+        <li>X: 0.04</li>
+        <li>Rating: 170, 200</li>
+        <li></li>
+    </ul>
+</ul>
+</div>
+
+{% endblock %}
