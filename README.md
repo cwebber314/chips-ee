@@ -30,18 +30,9 @@ Setup python:
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 ## Deploying to Heroku
+To publish, push the repo to git.  If heroku is configured properly it works:
 
-git push origin master
-```sh
-$ heroku create
-$ git push heroku master
-
-$ heroku run python manage.py migrate
-$ heroku open
-```
-or
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+  git push origin master
 
 ## Documentation
 

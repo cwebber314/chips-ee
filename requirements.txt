@@ -6,4 +6,4 @@ pytz
 whitenoise
 django-crispy-forms
 django-extensions
-crispy-forms
+django-crispy-forms
