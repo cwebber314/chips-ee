@@ -4,23 +4,28 @@ A barebones Django app, which can easily be deployed to Heroku.
 
 This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
 
-## Running Locally
+## Checkout repo
+Get the sources:
 
-Make sure you have Python [installed properly](http://install.python-guide.org). Also, install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
+  git clone https://github.com/cwebber314/chips-ee
+  cd chips-ee
 
-```sh
-$ git clone git@github.com:heroku/python-getting-started.git
-$ cd python-getting-started
+## Setup local machine
+Install heroku and gunicorn:
 
-$ pipenv install
+  sudo snap install --classic heroku
+  sudo apt-get install gunicorn
 
-$ createdb python_getting_started
+Setup python:
 
-$ python manage.py migrate
-$ python manage.py collectstatic
+  cd ~/path/to/chips-ee
+  pip install -r requirements.txt
 
-$ heroku local
-```
+
+## Running Heroku Locally
+
+  cd ~/path/to/chips-ee
+  heroku local
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
