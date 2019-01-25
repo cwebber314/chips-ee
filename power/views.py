@@ -100,8 +100,8 @@ def bus(request):
         form = BusIdevForm(request.POST)
         if form.is_valid():
             idev = dedent("""\
-                    @! TODO: Fix this.  Add the Nominal KV
-                    BAT_BUS_DATA_3,%(busnum)d,%(ide)s,%(area)s,%(zone)s,%(owner)s,0.0, 1.0,0.0, 1.1, 0.9, 1.1, 0.9,'%(busname)s'\
+                    @! Add bus %(busnum)d, %(buskv)s kV
+                    BAT_BUS_DATA_3,%(busnum)d,%(ide)s,%(area)s,%(zone)s,%(owner)s,%(buskv)s, 1.0,0.0, 1.1, 0.9, 1.1, 0.9,'%(busname)s'\
                     """)
             data = form.cleaned_data
             idev = idev % data
