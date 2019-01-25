@@ -50,11 +50,11 @@ def cond_pu(cond, kv, length):
     cond['se_mva'] = round(cond['se_amps'] * amps_to_mva)
     cond['Rpu'] = cond['R_ohms'] * length / Zbase
     cond['Xpu'] = cond['X_ohms'] * length / Zbase
-    cond['Bpu'] = cond['B_mhos'] * length / Ybase
+    cond['Bpu'] = cond['B_mhos'] * length * Ybase
 
     cond['R0pu'] = cond['R0_ohms'] * length / Zbase
     cond['X0pu'] = cond['X0_ohms'] * length / Zbase
-    cond['B0pu'] = cond['B0_mhos'] * length / Ybase
+    cond['B0pu'] = cond['B0_mhos'] * length * Ybase
     return cond
 
 def index(request):
