@@ -11,9 +11,9 @@ from io import StringIO
 
 conds="""\
 condid,description,R_ohms,X_ohms,B_mhos,R0_ohms,X0_ohms,B0_mhos,sn_amps,se_amps
-1,795 ACSR 26/7 (Drake),0.129605,0.758057,5.63327E-06,1.0,1.0,1.0,1001,1451
-2,2 - 954 ACSR 54/7 (Cardinal),0.0547515,0.5737005,7.34216E-06,1.0,1.0,1.0,2226,3246
-3,1 - 1590 ACSR 54/19 (Falcon),0.06625725,0.76215675,5.5879E-06,1.0,1.0,1.0,1551,2347\
+1,795 ACSR 26/7 (Drake),0.13064184,0.78423192,5.49254E-06,0.42887088,1.78213752,3.32388E-06,1001,1451
+2,2 - 954 KCM ACSR (Cardinal),0.057132,0.55584675,7.78996E-06,0.35588475,1.55327625,3.75047E-06,2226,3246
+3,1590 KCM ACSR (Falcon),0.0690345,0.74390625,8.25676425,0.366597,1.742526,4.57651125,1551,2347
 """
 f = StringIO(conds)
 reader = csv.DictReader(f)
@@ -82,8 +82,8 @@ def branch(request):
             #flash('IDEV Created') # right now there is nowhere in HTML to receive the flash
             idev = dedent("""\
                 @! Branch is: %(description)s %(length)s mi at %(kv)s kV
-                BAT_BRANCH_DATA,%(to_bus)s,%(from_bus)s,'%(ckt)s',,,%(owner)s,,,,%(Rpu)7f,%(Xpu)7f,%(Bpu)7f,%(sn_mva)d,%(se_mva)d,%(se_mva)d,,,,,%(length)s,,,,,;
-                BAT_SEQ_DATA,%(to_bus)s,%(from_bus)s,'%(ckt)s',%(R0pu)7f,%(X0pu)7f,%(B0pu)7f\
+                BAT_BRANCH_DATA,%(from_bus)s,%(to_bus)s,'%(ckt)s',,,%(owner)s,,,,%(Rpu)7f,%(Xpu)7f,%(Bpu)7f,%(sn_mva)d,%(se_mva)d,%(se_mva)d,,,,,%(length)s,,,,,;
+                BAT_SEQ_BRANCH_DATA_3,%(from_bus)s,%(to_bus)s,'%(ckt)s',,%(R0pu)7f,%(X0pu)7f,%(B0pu)7f,,,,,,;
                 """) % cond
         else:
             idev = 'ERROR'
