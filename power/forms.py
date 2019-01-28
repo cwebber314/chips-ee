@@ -17,6 +17,7 @@ COND_CHOICES = (
     (1, '795 ACSR 26/7 (Drake)'),
     (2, '2 - 954 ACSR 54/7 (Cardinal)'),
     (3, '1 - 1590 ACSR 54/7 (Falcon)'),
+    (4, '3 - 954 ACSR 54/7 (Cardinal) [17 ft SPECIAL]'),
     )
 
 class BusIdevForm(forms.Form):
