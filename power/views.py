@@ -10,11 +10,11 @@ import csv
 from io import StringIO
 
 conds="""\
-condid,description,R_ohms,X_ohms,B_mhos,R0_ohms,X0_ohms,B0_mhos,sn_amps,se_amps
-1,795 ACSR 26/7 (Drake),0.13064184,0.78423192,0.19920024,0.42887088,1.78213752,0.12054852,1001,1451
-2,2 - 954 KCM ACSR (Cardinal),0.057132,0.55584675,11.035998,0.35588475,1.55327625,5.313276,2226,3246
-3,1590 KCM ACSR (Falcon),0.0690345,0.74390625,8.25676425,0.366597,1.742526,4.57651125,1551,2347
-4,bundled 3-954 KCM ACSR (Cardinal) [17 ft SPECIAL],0.03689775,0.42015825,14.12231625,0.36064575,1.44139275,5.99052825,3339,4869\
+condid,description,R_ohms,X_ohms,B_mhos,R0_ohms,X0_ohms,B0_ohms,sn_amps,se_amps
+1,1590 KCM ACSR (Falcon),0.0690345,0.74390625,5.82819E-06,0.366597,1.742526,3.23041E-06,1551,2347
+2,2 - 954 KCM ACSR (Cardinal),0.057132,0.55584675,7.78996E-06,0.35588475,1.55327625,3.75047E-06,2226,3246
+3,795 ACSR 26/7 (Drake),0.13064184,0.78423192,5.49254E-06,0.42887088,1.78213752,3.32388E-06,1001,1451
+4,bundled 3-954 KCM ACSR (Cardinal) [17 ft SPECIAL],0.03689775,0.42015825,9.96849E-06,0.36064575,1.44139275,4.22852E-06,3339,4869\
 """
 f = StringIO(conds)
 reader = csv.DictReader(f)
@@ -51,11 +51,11 @@ def cond_pu(cond, kv, length):
     cond['se_mva'] = round(cond['se_amps'] * amps_to_mva)
     cond['Rpu'] = cond['R_ohms'] * length / Zbase
     cond['Xpu'] = cond['X_ohms'] * length / Zbase
-    cond['Bpu'] = cond['B_mhos'] * length * Ybase
+    cond['Bpu'] = cond['B_ohms'] * length / Ybase
 
     cond['R0pu'] = cond['R0_ohms'] * length / Zbase
     cond['X0pu'] = cond['X0_ohms'] * length / Zbase
-    cond['B0pu'] = cond['B0_mhos'] * length * Ybase
+    cond['B0pu'] = cond['B0_mhos'] * length / Ybase
     return cond
 
 def index(request):
