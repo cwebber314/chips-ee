@@ -14,9 +14,9 @@ KV_CHOICES = (
     ('765', 765.0),
     )
 COND_CHOICES = (
-    (1, '795 ACSR 26/7 (Drake)'),
+    (1, '1 - 1590 ACSR 54/7 (Falcon)'),
     (2, '2 - 954 ACSR 54/7 (Cardinal)'),
-    (3, '1 - 1590 ACSR 54/7 (Falcon)'),
+    (3, '795 ACSR 26/7 (Drake)'),
     (4, '3 - 954 ACSR 54/7 (Cardinal) [17 ft SPECIAL]'),
     )
 
