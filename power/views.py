@@ -10,7 +10,7 @@ import csv
 from io import StringIO
 
 conds="""\
-condid,description,R_ohms,X_ohms,B_mhos,R0_ohms,X0_ohms,B0_ohms,sn_amps,se_amps
+condid,description,R_ohms,X_ohms,B_mhos,R0_ohms,X0_ohms,B0_mhos,sn_amps,se_amps
 1,1590 KCM ACSR (Falcon),0.0690345,0.74390625,5.82819E-06,0.366597,1.742526,3.23041E-06,1551,2347
 2,2 - 954 KCM ACSR (Cardinal),0.057132,0.55584675,7.78996E-06,0.35588475,1.55327625,3.75047E-06,2226,3246
 3,795 ACSR 26/7 (Drake),0.13064184,0.78423192,5.49254E-06,0.42887088,1.78213752,3.32388E-06,1001,1451
