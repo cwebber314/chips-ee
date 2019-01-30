@@ -10,11 +10,11 @@ import csv
 from io import StringIO
 
 conds="""\
-condid,description,R_ohms,X_ohms,B_mhos,R0_ohms,X0_ohms,B0_mhos,sn_amps,se_amps
-1,1590 KCM ACSR (Falcon),0.0690345,0.74390625,5.82819E-06,0.366597,1.742526,3.23041E-06,1552,2349
-2,2 - 954 KCM ACSR (Cardinal),0.057132,0.55584675,7.78996E-06,0.35588475,1.55327625,3.75047E-06,2226,3246
-3,795 ACSR 26/7 (Drake),0.13064184,0.78423192,5.49254E-06,0.42887088,1.78213752,3.32388E-06,1001,1451
-4,bundled 3-954 KCM ACSR (Cardinal) [SPECIAL],0.03689775,0.42015825,9.96849E-06,0.36064575,1.44139275,4.22852E-06,3369,4815\
+condid,description,R_ohms,X_ohms,B_mhos,R0_ohms,X0_ohms,B0_mhos,sn_amps,se_amps,mot_normal,mot_emer
+1,1590 KCM ACSR (Falcon),0.0690345,0.74390625,5.82819E-06,0.366597,1.742526,3.23041E-06,1551,2347,95,155
+2,2 - 954 KCM ACSR (Cardinal),0.057132,0.55584675,7.78996E-06,0.35588475,1.55327625,3.75047E-06,2226,3246,95,155
+3,795 ACSR 26/7 (Drake),0.13064184,0.78423192,5.49254E-06,0.42887088,1.78213752,3.32388E-06,1001,1451,95,155
+4,bundled 3-954 KCM ACSR (Cardinal) [SPECIAL],0.03689775,0.42015825,9.96849E-06,0.36064575,1.44139275,4.22852E-06,3369,4815,95,155\
 """
 f = StringIO(conds)
 reader = csv.DictReader(f)
@@ -83,6 +83,7 @@ def branch(request):
             #flash('IDEV Created') # right now there is nowhere in HTML to receive the flash
             idev = dedent("""\
                 @! Branch is: %(description)s %(length)s mi at %(kv)s kV
+                @! Use %(description)s conductor with %(sn_mva)d/%(se_mva)d MVA (%(sn_amps)d/%(se_amps)d A) ratings and maximum operating temperature (MOT) of %(mot_normal)s/%(mot_emer)s degC
                 BAT_BRANCH_DATA,%(from_bus)s,%(to_bus)s,'%(ckt)s',,,%(owner)s,,,,%(Rpu)7f,%(Xpu)7f,%(Bpu)7f,%(sn_mva)d,%(se_mva)d,%(se_mva)d,,,,,%(length)s,,,,,;
                 BAT_SEQ_BRANCH_DATA_3,%(from_bus)s,%(to_bus)s,'%(ckt)s',,%(R0pu)7f,%(X0pu)7f,%(B0pu)7f,,,,,,;
                 """) % cond
