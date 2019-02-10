@@ -2,7 +2,7 @@
 
 This is a little bit more than a Hello World example using Django and Heroku.  The site contains some simple math and other utilities related to PSSE. 
 
-It's published (here) [https://chips-ee.herokuapp.com/]
+It's published [here](https://chips-ee.herokuapp.com/)
 
 ## Checkout repo
 Get the sources:
