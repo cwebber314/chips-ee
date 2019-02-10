@@ -1,8 +1,8 @@
-# Python: Getting Started
+# Python and Heroku App 
 
-A barebones Django app, which can easily be deployed to Heroku.
+This is a little bit more than a Hello World example using Django and Heroku.  The site contains some simple math and other utilities related to PSSE. 
 
-This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
+It's published [here] (https://chips-ee.herokuapp.com/)
 
 ## Checkout repo
 Get the sources:
