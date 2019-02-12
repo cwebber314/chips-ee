@@ -4,6 +4,7 @@ from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder
 from crispy_forms.bootstrap import StrictButton, FormActions
 
 KV_CHOICES = (
+    ('34.5', 34.5),
     ('69', 69.0),
     ('115', 115.0),
     ('138', 138.0),
@@ -93,8 +94,8 @@ class TransformerIdevForm(forms.Form):
 
 
 class BranchIdevForm(forms.Form):
-    kv = forms.ChoiceField(choices=KV_CHOICES)
-    condid = forms.ChoiceField(choices=COND_CHOICES)
+    kv = forms.ChoiceField(choices=KV_CHOICES, label='kV')
+    condid = forms.ChoiceField(choices=COND_CHOICES, label='Conductor')
     line_length = forms.FloatField(label="Line Length (mi)", initial=1.0)
     from_bus = forms.IntegerField(label="From Bus", initial=100)
     to_bus = forms.IntegerField(label="To Bus", initial=101)
